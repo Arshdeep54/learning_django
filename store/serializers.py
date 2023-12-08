@@ -16,7 +16,16 @@ class CollectionSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ["id", "title", "price", "taxed_price", "collection"]
+        fields = [
+            "id",
+            "title",
+            "slug",
+            "description",
+            "price",
+            "inventory",
+            "taxed_price",
+            "collection",
+        ]
 
     # id = serializers.IntegerField()
     # title = serializers.CharField(max_length=255)
@@ -24,9 +33,9 @@ class ProductSerializer(serializers.ModelSerializer):
     #     max_digits=6, decimal_places=2, source="price"
     # )
     taxed_price = serializers.SerializerMethodField(method_name="taxcalculate")
-    collection = serializers.HyperlinkedRelatedField(
-        queryset=Collection.objects.all(), view_name="collection_detail"
-    )
+    # collection = serializers.HyperlinkedRelatedField(
+    #     queryset=Collection.objects.all(), view_name="collection_detail"
+    # )
 
     def taxcalculate(self, product):
         return product.price * Decimal(1.1)
