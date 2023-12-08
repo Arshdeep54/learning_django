@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
 
+admin.site.site_header = "learnbackend Admin"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("firstapp.urls")),
+    path("firstapp/", include("firstapp.urls")),
+    path("store/", include("store.urls")),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
