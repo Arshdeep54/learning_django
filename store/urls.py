@@ -2,9 +2,10 @@ from django.urls import path
 from . import views
 from rest_framework.routers import SimpleRouter, DefaultRouter
 
+# from rest_framework_nested import routers
 
 routers = DefaultRouter()
-routers.register("products", views.ProductViewSet)
+routers.register("products", views.ProductViewSet, basename="products")
 routers.register("collections", views.CollectionViewSet)
 
 urlpatterns = routers.urls
